@@ -80,22 +80,14 @@ except:
     st.line_chart(df['y'],use_container_width =True,height = 300) """ 
 code2="""
  m = Prophet(
-    seasonality_mode=seasonality,
-    daily_seasonality=daily,
-    weekly_seasonality=weekly,
-    yearly_seasonality=yearly,
-    growth=growth,
     changepoint_prior_scale=changepoint_scale,
     seasonality_prior_scale= seasonality_scale)
 if holidays:
     m.add_country_holidays(country_name=selected_country)
                         
-if monthly:
-    m.add_seasonality(name='monthly', period=30.4375, fourier_order=5)
+
 m = m.fit(df)
 future = m.make_future_dataframe(periods=periods_input,freq='D')
-future['peak'] = future['ds'].apply(is_peak_season)
-future['off_peak'] = ~future['ds'].apply(is_peak_season)
 future['cap']=cap
 future['floor']=floor
                 """
