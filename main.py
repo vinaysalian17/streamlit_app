@@ -123,8 +123,8 @@ st.write(fig4)
 """
 code4 = """
 param_grid = {  
-            'changepoint_prior_scale': [0.01, 0.1, 0.3, 0.5, 0.7, 1.0],
-            'seasonality_prior_scale': [0.1, 1.0,3.0, 5.0,7.0, 10.0],
+            'changepoint_prior_scale': [0.01, 0.03,0.1, 0.3, 0.5, 0.7, 1.0],
+            'seasonality_prior_scale': [0.01, 0.03,0.1, 1.0,3.0, 5.0,7.0, 10.0],
              }
 # Generate all combinations of parameters
 all_params = [dict(zip(param_grid.keys(), v)) for v in itertools.product(*param_grid.values())]
@@ -237,7 +237,7 @@ if page == "Application":
             
         with st.expander("Horizon"):
             periods_input = st.number_input('Select how many future periods (days) to forecast.',
-            min_value = 1, max_value = 550,value=365)
+            min_value = 1, max_value = 730,value=365)
 
         with st.expander("Seasonality"):
             st.markdown("""The default seasonality used is additive, but the best choice depends on the specific case, therefore specific domain knowledge is required. For more informations visit the [documentation](https://facebook.github.io/prophet/docs/multiplicative_seasonality.html)""")
@@ -335,9 +335,9 @@ if page == "Application":
         with st.expander('Hyperparameters'):
             st.write('In this section it is possible to tune the scaling coefficients.')
             
-            seasonality_scale_values= [0.1, 1.0,3.0, 5.0,7.0, 10.0]    
-            changepoint_scale_values= [0.01, 0.1, 0.3, 0.5, 0.7, 1.0]
-            changepoint_range_values = [0.3,0.5,0.7,0.8,0.85,0.90,0.95]
+            seasonality_scale_values= [0.01, 0.03,0.1, 1.0,3.0, 5.0,7.0, 10.0]    
+            changepoint_scale_values= [0.01, 0.03, 0.1, 0.3, 0.5, 0.7, 1.0]
+            changepoint_range_values = [0.7,0.8,0.85,0.90,0.95]
 
             st.write("The changepoint prior scale determines the flexibility of the trend, and in particular how much the trend changes at the trend changepoints.")
             changepoint_scale= st.select_slider(label= 'Changepoint prior scale',options=changepoint_scale_values)
@@ -484,8 +484,8 @@ if page == "Application":
         st.markdown("""For more informations visit the [documentation](https://facebook.github.io/prophet/docs/diagnostics.html#hyperparameter-tuning)""")
 
         param_grid = {  
-                            'changepoint_prior_scale': [0.01, 0.1, 0.3, 0.5, 0.7, 1.0],
-                            'seasonality_prior_scale': [0.1, 1.0,3.0, 5.0,7.0, 10.0],
+                            'changepoint_prior_scale': [0.01,0.03, 0.1, 0.3, 0.5, 0.7, 1.0],
+                            'seasonality_prior_scale': [0.01, 0.03,0.1, 1.0,3.0, 5.0,7.0, 10.0],
                         }
 
         # Generate all combinations of parameters
