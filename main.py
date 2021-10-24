@@ -528,8 +528,32 @@ if page == "Application":
 
             else:
                 st.write("Create a model to optimize")    
+                
+                
+                
+        st.subheader("6. MAPE ")
+        
+        st.write("Calculate the MAPE")
+        
+        if input:
+           
+            if output == 1:
+               col1, col2 = st.columns(2)
+               with col1:
+                   if st.button("Calculate MAPE"):
+                      with st.spinner("Calculating MAPE ..."):
+                          act = df['y']
+                          pre = forecast['yhat']
+                          mape = MAPE(act,pre)
+                          
+                          forecast['mape'] = 100*mape
+                          forecast['mape'] = forecast['mape'].replace(np.nan, 0)
+                          st.dataframe(forecast)
+                          st.write("Average of MAPE is: ", np.mean(mape[np.isfinite(mape)]))
+            else:
+              st.write("Generate a MAPE.")                  
 
-        st.subheader('6. Export results ✨')
+        st.subheader('7. Export results ✨')
         
         st.write("Finally you can export your result forecast, model configuration and evaluation metrics.")
         
